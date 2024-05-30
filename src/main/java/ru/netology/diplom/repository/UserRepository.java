@@ -1,17 +1,20 @@
 package ru.netology.diplom.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.netology.diplom.dto.User;
+import ru.netology.diplom.entity.User;
+
+import java.util.Optional;
 
 @Repository
 @Transactional
-public interface UserRepository extends JpaRepository<User, Integer> {
-    public User findByLogin(String login);
+public interface UserRepository extends CrudRepository<User,Long>/*JpaRepository<User, Integer>*/ {
+    Optional<User> findByLogin(String login);
+  //  public User findByLogin(String login);
 
     @Modifying
     @Query("update User user set user.token = :token where user.login = :login")

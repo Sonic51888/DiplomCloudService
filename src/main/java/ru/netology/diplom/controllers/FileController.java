@@ -1,20 +1,22 @@
 package ru.netology.diplom.controllers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.netology.diplom.dto.FileInfo;
+import ru.netology.diplom.entity.FileInfo;
 import ru.netology.diplom.service.FileService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
+//@AllArgsConstructor
 @RequestMapping
 @CrossOrigin(origins = "http://localhost:8080")
 public class FileController {
@@ -49,7 +51,8 @@ public class FileController {
     }
 
     @GetMapping(value = "/list")
-    public ResponseEntity<?> getListFile(@RequestParam("limit") int limit) {
+    public ResponseEntity<?> getListFile(@RequestParam("limit") int limit, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
         return new ResponseEntity<>(fileService.show(limit), HttpStatus.OK);
     }
 

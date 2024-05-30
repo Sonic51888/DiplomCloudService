@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import ru.netology.diplom.dto.FileInfo;
+import ru.netology.diplom.entity.FileInfo;
 import ru.netology.diplom.dto.FileResponse;
+import ru.netology.diplom.entity.User;
 import ru.netology.diplom.repository.FileRepository;
 import ru.netology.diplom.repository.UserRepository;
 
@@ -42,7 +44,7 @@ public class FileService {
                 .name(fileName)
                 .data(files.getBytes())
                 .size(files.getSize())
-                .user(userRepository.findByLogin(login))
+               .user(userRepository.findByLogin(login))
                 .uploadDate(LocalDate.now())
                 .build();
         fileRepository.save(file);
@@ -65,14 +67,12 @@ public class FileService {
     }
 
     public Object show(int limit) {
+
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
-        var fileList = fileRepository.findAllFilesByUser(userRepository.findByLogin(login));
+        Optional<User> optionalUser = userRepository.findByLogin(login);
+        User user = optionalUser.orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
+        var fileList = fileRepository.findAllFilesByUser(user);
         List<FileResponse> list = new ArrayList<>();
-//        for (var file : fileList) {
-//            var fileResponse = new FileResponse(file.getName(), file.getSize());
-//            if (limit-- == 0) break;
-//            list.add(fileResponse);
-//        }
 
         for (int i = 0; i < limit && i < fileList.size(); i++) {
             var file = fileList.get(i);

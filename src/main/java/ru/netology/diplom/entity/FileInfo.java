@@ -1,17 +1,15 @@
-package ru.netology.diplom.dto;
-import jakarta.persistence.*;
+package ru.netology.diplom.entity;
+
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
-@Setter
-@ToString
-@Table(name="files", schema = "diplom")
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="files", schema = "netology")
 public class FileInfo {
 
     @Id

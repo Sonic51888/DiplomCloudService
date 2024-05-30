@@ -1,30 +1,60 @@
 package ru.netology.diplom.service;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.netology.diplom.dto.User;
+import org.springframework.transaction.annotation.Transactional;
+import ru.netology.diplom.entity.User;
+import ru.netology.diplom.repository.RoleRepository;
 import ru.netology.diplom.repository.UserRepository;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
+//@AllArgsConstructor
 @EnableJpaRepositories
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
-    @Qualifier("userRepository")
+    // @Qualifier("userRepository")
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-
-    public UserDetails getUserByLogin(String login) {
-        User user = userRepository.findByLogin(login);
-        return user == null ? null : new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), new ArrayList<>());
+    public Optional<User> findByLogin(String login) {
+        return userRepository.findByLogin(login);
     }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        User user = userRepository.findByLogin(login).orElseThrow(() -> new UsernameNotFoundException(
+                String.format("User %s not found", login)
+        ));
+        return new org.springframework.security.core.userdetails.User(
+                user.getLogin(),
+                user.getPassword(),
+                user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toList())
+        );
+    }
+
+    public void createNewUser(User user) {
+        user.setRoles(List.of(roleRepository.findByName("ROLE_USER").get()));
+        userRepository.save(user);
+    }
+
+//    public UserDetails getUserByLogin(String login) {
+//        Optional<User> user = userRepository.findByLogin(login);
+//        return user.isEmpty() ? null : new org.springframework.security.core.userdetails.User(user.get().getLogin(), user.get().getPassword(), new ArrayList<>());
+//    }
 
     public void addTokenToUser(String login, String token) {
         userRepository.addTokenToUser(login, token);
