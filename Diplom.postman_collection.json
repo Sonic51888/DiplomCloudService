@@ -1,0 +1,334 @@
+{
+	"info": {
+		"_postman_id": "2c76191e-865f-4f38-a41a-9f23c530ab6b",
+		"name": "Diplom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34211567"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData = pm.response.json();\r",
+							"pm.environment.set(\"token\", responseData['auth-token']);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"login\": \"admin\",\n    \"password\": \"100\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{server_url}}/login"
+			},
+			"response": []
+		},
+		{
+			"name": "list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNzE3MjU1MDE1LCJpYXQiOjE3MTcxNjg2MTV9.znly0u6E93fYxRwo5lABtSyqafm2PaafIK7_Xyj8UAg"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server_url}}/list?limit=3",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"list"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "file upload",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNzE3MjU1MDE1LCJpYXQiOjE3MTcxNjg2MTV9.znly0u6E93fYxRwo5lABtSyqafm2PaafIK7_Xyj8UAg"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"description": "C:\\api.txt",
+							"type": "file",
+							"src": "/C:/api.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_url}}/file?filename=api.txt",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"file"
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "api.txt"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete file api.txt",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNzE3MjU1MDE1LCJpYXQiOjE3MTcxNjg2MTV9.znly0u6E93fYxRwo5lABtSyqafm2PaafIK7_Xyj8UAg"
+					}
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "{{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{server_url}}/file?filename=api.txt",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"file"
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "api.txt"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update name",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNzE3MjU1MDE1LCJpYXQiOjE3MTcxNjg2MTV9.znly0u6E93fYxRwo5lABtSyqafm2PaafIK7_Xyj8UAg"
+					}
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"rename.txt\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server_url}}/file?filename=api.txt",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"file"
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "api.txt"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete file rename.txt",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNzE3MjYzOTc0LCJpYXQiOjE3MTcxNzc1NzR9.mpK8NbB-etWg1Re6-TNUhCcRrrahc6sPGtejbCVDBk4"
+					}
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "{{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{server_url}}/file?filename=rename.txt",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"file"
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "rename.txt"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "file download",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNzE3MjU1MDE1LCJpYXQiOjE3MTcxNjg2MTV9.znly0u6E93fYxRwo5lABtSyqafm2PaafIK7_Xyj8UAg"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "{{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{server_url}}/file?filename=rename.txt",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"file"
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "rename.txt"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server_url",
+			"value": "server_url",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "token",
+			"type": "string"
+		}
+	]
+}

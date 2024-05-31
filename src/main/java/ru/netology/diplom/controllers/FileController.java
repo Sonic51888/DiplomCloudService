@@ -24,6 +24,7 @@ public class FileController {
     @Autowired
     private final FileService fileService;
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping(value = "/file")
     public ResponseEntity<?> saveFile(@RequestParam("filename") String fileName, @RequestBody MultipartFile file) throws IOException {
         fileService.upload(fileName, file);
@@ -31,7 +32,7 @@ public class FileController {
     }
 
     @DeleteMapping(value = "/file")
-    public ResponseEntity<?> deleteFile(@RequestParam("filename") String fileName) throws IOException {
+    public ResponseEntity<?> deleteFile(@RequestParam("filename") String fileName)  {
         fileService.delete(fileName);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -49,7 +50,7 @@ public class FileController {
                                              @RequestBody String newFileName) throws IOException {
         return new ResponseEntity<>(fileService.updateFileName(fileName, newFileName), HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping(value = "/list")
     public ResponseEntity<?> getListFile(@RequestParam("limit") int limit, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");

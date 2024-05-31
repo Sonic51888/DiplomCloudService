@@ -1,4 +1,4 @@
-create schema netology;
+create schema IF NOT EXISTS netology;
 
 create table postgres.netology.users
 (
@@ -16,5 +16,6 @@ CREATE TABLE IF NOT EXISTS netology.files
     upload_date           DATE         NOT NULL,
     content bytea not null ,
     user_id           int,
-    FOREIGN KEY (user_id) REFERENCES public.users (id)
+    FOREIGN KEY (user_id) REFERENCES netology.users (id)
 );
+

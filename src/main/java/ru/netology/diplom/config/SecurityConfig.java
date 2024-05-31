@@ -53,9 +53,9 @@ public class SecurityConfig {
         http
                 // .httpBasic().disable()
                 .csrf().disable()
-                //.cors().disable()
+                .cors()
                 //+    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
+                .and()
                 .authorizeRequests()
                 .antMatchers("/list").authenticated()
                 .antMatchers("/file").authenticated()

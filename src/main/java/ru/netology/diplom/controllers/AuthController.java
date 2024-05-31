@@ -30,35 +30,35 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-
+    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping(value = "/login")
     public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getLogin(), authRequest.getPassword()));
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            authRequest.getLogin(),
+                            authRequest.getPassword()));
         } catch (BadCredentialsException e) {
-            return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(),
-                    "Не правильный логин или пароль"), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(
+                    new AppError(HttpStatus.UNAUTHORIZED.value(),
+                    "Не правильный логин или пароль"),
+                    HttpStatus.UNAUTHORIZED);
         }
         UserDetails userDetails = userService.loadUserByUsername(authRequest.getLogin());
         String token = jwtTokenUtils.generateToken(userDetails);
         userService.addTokenToUser(authRequest.getLogin(), token);
-        return ResponseEntity.ok(new JwtResponse(token));
-//        if (userDetails != null) {
-//            var name = userDetails.getUsername();
-//            var pass = userDetails.getPassword();
-//            if (name.equals(authRequest.getLogin()) && pass.equals(authRequest.getPassword())) {
-//                final String token = jwtTokenUtils.generateToken(userDetails);
-//                userService.addTokenToUser(authRequest.getLogin(), token);
-//                return ResponseEntity.status(HttpStatus.OK).body(JwtResponse.builder().token(token).build());
-//            }
-//        }
-//        return ResponseEntity.status(400).body("Bad credentials");
+//        HttpHeaders headers = new HttpHeaders(); //Новое добавление
+//        headers.add("Authorization", "Bearer " + token);
+        return ResponseEntity.ok(/*new JwtResponse(token)*/)
+                .header("Authorization", "Bearer " + token)
+                .header("Access-Control-Allow-Origin","http://localhost:8080")
+                .body(new JwtResponse(token));
     }
-
-//    @PostMapping("/logout")
-//    public ResponseEntity<?> logout(@RequestHeader("auth-token") String token) {
-//        userService.logoutUser(token);
-//        return ResponseEntity.ok(HttpStatus.OK);
-//    }
+    @CrossOrigin(origins = "http://localhost:8080")
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@RequestHeader("auth-token") String token) {
+        userService.logoutUser(token);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 
 }
