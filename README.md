@@ -1,1 +1,108 @@
-# Дипломная работа «Облачное хранилище»## Описание проектаЗадача — разработать REST-сервис. Сервис должен предоставить REST-интерфейс для загрузки файлов и вывода списка уже загруженных файлов пользователя. Все запросы к сервису должны быть авторизованы. Заранее подготовленное веб-приложение (FRONT) должно подключаться к разработанному сервису без доработок, а также использовать функционал FRONT для авторизации, загрузки и вывода списка файлов пользователя.## Требования к приложению- Сервис должен предоставлять REST-интерфейс для интеграции с FRONT.- Сервис должен реализовывать все методы, описанные в [yaml-файле](documentation/CloudServiceSpecification.yaml):  1. Вывод списка файлов.  2. Добавление файла.  3. Удаление файла.  4. Авторизация.- Все настройки должны вычитываться из файла настроек (yml).- Информация о пользователях сервиса (логины для авторизации) и данные должны храниться в базе данных (на выбор студента).## Требования к реализации- Приложение разработано с использованием Spring Boot.- Использован сборщик пакетов gradle/maven.- Для запуска используется docker, docker-compose.- Код размещён на Github.- Код покрыт unit-тестами с использованием mockito.- Добавлены интеграционные тесты с использованием testcontainers.## Шаги реализации- Изучите протокол получения и отправки сообщений между FRONT и BACKEND.- Нарисуйте схему приложений.- Опишите архитектуру приложения, где хранятся настройки и большие файлы, структуры таблиц/коллекций базы данных.- Создайте репозиторий проекта на Github.- Напишите приложение с использованием Spring Boot.- Протестируйте приложение с помощью curl/postman.- Протестируйте приложение с FRONT.- Напишите README.md к проекту.- Отправьте на проверку.## Описание и запуск FRONT1. Установите nodejs (версия не ниже 19.7.0) на компьютер, следуя [инструкции](https://nodejs.org/ru/download/current/).2. Скачайте [FRONT](./netology-diplom-frontend) (JavaScript).3. Перейдите в папку FRONT приложения и все команды для запуска выполняйте из неё.4. Следуя описанию README.md FRONT проекта, запустите nodejs-приложение (`npm install`, `npm run serve`).5. Далее нужно задать url для вызова своего backend-сервиса.    1. В файле `.env` FRONT (находится в корне проекта) приложения нужно изменить url до backend, например: `VUE_APP_BASE_URL=http://localhost:8080`.        1. Нужно указать корневой url вашего backend, к нему frontend будет добавлять все пути согласно спецификации       2. Для `VUE_APP_BASE_URL=http://localhost:8080` при выполнении логина frontend вызовет `http://localhost:8080/login`    2. Запустите FRONT снова: `npm run serve`.    3. Изменённый `url` сохранится для следующих запусков.6. По умолчанию FRONT запускается на порту 8080 и доступен по url в браузере `http://localhost:8080`.    1. Если порт 8080 занят, FRONT займёт следующий доступный (`8081`). После выполнения `npm run serve` в терминале вы увидите, на каком порту он запустился. ## Авторизация приложенияFRONT-приложение использует header `auth-token`, в котором отправляет токен (ключ-строка) для идентификации пользователя на BACKEND.Для получения токена нужно пройти авторизацию на BACKEND и отправить на метод /login логин и пароль. В случае успешной проверки в ответ BACKEND должен вернуть json-объектс полем `auth-token` и значением токена. Все дальейшие запросы с FRONTEND, кроме метода /login, отправляются с этим header.Для выхода из приложения нужно вызвать метод BACKEND /logout, который удалит/деактивирует токен. Последующие запросы с этим токеном будут не авторизованы и вернут код 401.Обратите внимание, что название самого параметра (как и всех параметров в спецификации), его регистр имеют значение. Важно, чтобы ваш backend возвращал токен в поле `auth-token` – если поле будет называться `authToken` или `authtoken`, фронт не сможет найти токен и дальше логина процесс не пройдёт.## Настройка CORSЧтобы FRONT смог обратиться к вашему серверу, необходимо настроить CORS в вашем приложении. Например, можно сделать это, добавив конфигурацию: ```javaimport org.springframework.context.annotation.Configuration;import org.springframework.web.servlet.config.annotation.CorsRegistry;import org.springframework.web.servlet.config.annotation.EnableWebMvc;import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;@Configuration@EnableWebMvcclass WebConfig implements WebMvcConfigurer {    @Override    public void addCorsMappings(CorsRegistry registry) {        registry.addMapping("/**")            .allowCredentials(true)            .allowedOrigins("http://localhost:8081")            .allowedMethods("*");    }}```где адрес в параметре `allowedOrigins` – это адрес фронта.## Дополнительные рекомендацииЭто итоговый проект, где вы будете использовать все полученные вами знания не только в написании кода, но и в поиске информации, в траблшутинге и т.д. Используйте все доступные вам инструменты, чтобы решить возникающие проблемы:1) Используйте консоль разработчика в браузере, вкладка Network. Она позволит вам увидеть, какой запрос отправляет фронт, какие параметры и url он использует, какой ответ он получает.2) Используйте дебаг в IDEA, чтобы увидеть весь процесс обработки запроса вашим приложением.3) Используйте интернет для поиска стандартных подходов, гайдов, распространённых ошибок. Все проблемы уже были решены до нас.____________### Если возникли вопросы- Попробуйте найти ответ в лекциях, материалах и домашних заданиях курса. После этого воспользуйтесь Google. В случае любой сложности вы можете задать вопрос дипломному руководителю. Но лучше сначала попытаться решить проблему самостоятельно.- В одном вопросе лучше описывать одну проблему. Так ответ дипломного руководителя будет максимально эффективным и полезным.- По возможности прикрепляйте к вопросу скриншоты и стрелочкой показывайте, где не получается. Программу для этого можно скачать [здесь](https://app.prntscr.com/ru/).- По возможности задавайте вопросы в комментариях к коду.- Начинайте работу над дипломом как можно раньше, чтобы было больше времени на правки.- Делайте диплом по частям, а не всё сразу. Так вы сможете оперативно внести правки, и не придётся переделывать большую часть работы. 
+# [Дипломный проект"Облачное хранилище"] (https://github.com/netology-code/jd-homeworks/blob/master/diploma/cloudservice.md)
+
+## Описание проекта
+
+## Технологический стек проекта:
+- Spring boot
+- SpringSecurity
+- СУБД PostgreSQL
+- Docker
+- Maven
+- frontend (Vue.js)
+
+### Запуск BACKEND:
+
+Проект запускается при помощи Docker, необходимо в корневой папке проекта выолнить команду docker-compose up.
+```shell
+docker-compose up
+```
+
+### Создание схемы в СУБД
+
+Схема, таблица и пользователи создаются следующими командами описанными в [Schema.sql](https://github.com/Sonic51888/DiplomCloudService/tree/main/src/main/resources/db)
+```shell
+create schema IF NOT EXISTS netology;
+
+create table IF NOT EXISTS netology.users (
+                       id                    bigserial,
+                       username              varchar(30) not null unique,
+                       password              varchar(80) not null,
+                       email                 varchar(50) unique,
+                       primary key (id)
+);
+
+create table IF NOT EXISTS netology.roles (
+                       id                    serial,
+                       name                  varchar(50) not null,
+                       primary key (id)
+);
+
+CREATE TABLE if not exists  netology.users_roles (
+                             user_id               bigint not null,
+                             role_id               int not null,
+                             primary key (user_id, role_id),
+                             foreign key (user_id) references netology.users (id),
+                             foreign key (role_id) references netology.roles (id)
+);
+
+CREATE TABLE IF NOT EXISTS netology.files
+(
+    id                BIGINT       NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+    file_name              varchar(255) NOT NULL,
+    size              BIGINT       NOT NULL,
+    upload_date           DATE         NOT NULL,
+    content bytea not null ,
+    user_id           int,
+    FOREIGN KEY (user_id) REFERENCES netology.users (id)
+);
+
+insert into  netology.roles (name)
+values
+    ('ROLE_USER'), ('ROLE_ADMIN');
+
+insert into netology.users (login, password, email)
+values
+    ('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com'), -- 100 пароль
+    ('admin', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'admin@gmail.com'); -- 100 пароль
+
+insert into netology.users_roles (user_id, role_id)
+values
+    (1, 1),
+    (2, 2);
+```
+
+### Запуск FRONT:
+
+1. Установите nodejs (версия не ниже 19.7.0) на компьютер, следуя [инструкции](https://nodejs.org/ru/download/current/).
+2. Скачайте [FRONT](./netology-diplom-frontend) (JavaScript).
+3. Перейдите в папку FRONT приложения и все команды для запуска выполняйте из неё.
+4. Следуя описанию README.md FRONT проекта, запустите nodejs-приложение (`npm install`, `npm run serve`).
+5. Далее нужно задать url для вызова своего backend-сервиса.
+    1. В файле `.env` FRONT (находится в корне проекта) приложения нужно изменить url до backend, например: `VUE_APP_BASE_URL=http://localhost:8080`. 
+       1. Нужно указать корневой url вашего backend, к нему frontend будет добавлять все пути согласно спецификации
+       2. Для `VUE_APP_BASE_URL=http://localhost:8080` при выполнении логина frontend вызовет `http://localhost:8080/login`
+    2. Запустите FRONT снова: `npm run serve`.
+    3. Изменённый `url` сохранится для следующих запусков.
+6. По умолчанию FRONT запускается на порту 8080 и доступен по url в браузере `http://localhost:8080`. 
+   1. Если порт 8080 занят, FRONT займёт следующий доступный (`8081`). После выполнения `npm run serve` в терминале вы увидите, на каком порту он запустился. 
+
+В качестве места хранилища файлов и данных о пользователях используется СУБД PostgreSQL.
+
+##Архитектура проекта
+![Cloudservice schema.png](documentation%Cloudservice schema.png)
+
+## Тестирование
+
+Тестирование осуществлено с помощью Postman использовалась следующая коллекция тестов [Библиотека тестов](Diplom.postman_collection.json)
+
+### Тест №1 /login
+В данном тесте показывается попытка залогиниться и получить токен от сервера
+
+Исходное состояние таблицы
+![Исходное состояние таблицы](documentation%tests%1 Исходное состояние таблицы USERS.png)
+
+Запрос в Postman
+![login и ответ сервера](documentation%tests%2 login и ответ сервера.png)
+
+Изменения в бд после запроса токена
+![Изменения в бд](documentation%tests%3 Изменения в бд после запроса токена.png)

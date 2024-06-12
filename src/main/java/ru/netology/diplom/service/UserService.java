@@ -51,10 +51,6 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-//    public UserDetails getUserByLogin(String login) {
-//        Optional<User> user = userRepository.findByLogin(login);
-//        return user.isEmpty() ? null : new org.springframework.security.core.userdetails.User(user.get().getLogin(), user.get().getPassword(), new ArrayList<>());
-//    }
 
     public void addTokenToUser(String login, String token) {
         userRepository.addTokenToUser(login, token);

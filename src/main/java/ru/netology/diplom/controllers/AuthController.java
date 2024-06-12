@@ -41,7 +41,7 @@ public class AuthController {
         } catch (BadCredentialsException e) {
             return new ResponseEntity<>(
                     new AppError(HttpStatus.UNAUTHORIZED.value(),
-                    "Не правильный логин или пароль"),
+                            "Не правильный логин или пароль"),
                     HttpStatus.UNAUTHORIZED);
         }
         UserDetails userDetails = userService.loadUserByUsername(authRequest.getLogin());

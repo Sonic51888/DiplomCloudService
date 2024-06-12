@@ -26,7 +26,7 @@ import ru.netology.diplom.service.UserService;
 
 public class SecurityConfig {
     private final UserService userService;
- private final JwtAuthFilter jwtAuthFilter;
+    private final JwtAuthFilter jwtAuthFilter;
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
