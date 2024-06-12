@@ -1,4 +1,4 @@
-[Дипломный проект"Облачное хранилище"] (https://github.com/netology-code/jd-homeworks/blob/master/diploma/cloudservice.md)
+# [Дипломный проект"Облачное хранилище"](https://github.com/netology-code/jd-homeworks/blob/master/diploma/cloudservice.md)
 
 ## Описание проекта
 
