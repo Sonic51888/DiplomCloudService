@@ -20,7 +20,7 @@ docker-compose up
 
 ### Создание схемы в СУБД
 
-Схема, таблица и пользователи создаются следующими командами описанными в [Schema.sql](https://github.com/Sonic51888/DiplomCloudService/tree/main/src/main/resources/db)
+Схема, таблица и пользователи создаются следующими командами описанными в [New.sql](https://github.com/Sonic51888/DiplomCloudService/tree/main/src/main/resources/db/new.sql)
 ```shell
 create schema IF NOT EXISTS netology;
 
