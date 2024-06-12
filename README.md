@@ -89,7 +89,7 @@ values
 В качестве места хранилища файлов и данных о пользователях используется СУБД PostgreSQL.
 
 ##Архитектура проекта
-![Cloudservice schema.png](documentation%Cloudservice schema.png)
+![Cloudservice schema.png](documentation/Cloudservice%20schema.png)
 
 ## Тестирование
 
