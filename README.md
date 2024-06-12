@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 # [Дипломный проект "Облачное хранилище"](https://github.com/netology-code/jd-homeworks/blob/master/diploma/cloudservice.md)
-=======
-# [Дипломный проект"Облачное хранилище"](https://github.com/netology-code/jd-homeworks/blob/master/diploma/cloudservice.md)
->>>>>>> bdfcd079588e99c814f632b893c8b21f2f7c3a99
+
 
 ## Описание проекта
 
@@ -105,7 +102,6 @@ values
 В данном тесте показывается попытка залогиниться и получить токен от сервера
 
 Исходное состояние таблицы
-<<<<<<< HEAD
 ![Исходное состояние таблицы](documentation/tests/1.png)
 
 Запрос в Postman
@@ -130,5 +126,34 @@ values
 Загрузка файла twitch.jpg
 ![Загрузка файла twitch.jpg](documentation/tests/7.png)
 
-Изменения в бд после загрузки файлов
-![Изменения в бд](documentation/tests/8.png)
+Изменения в БД после загрузки файлов
+![Изменения в БД](documentation/tests/8.png)
+
+### Тест №3 Вывод списка загруженных документов
+
+Запрос списка загруженных документов
+![Вывод списка документов](documentation/tests/9.png)
+
+### Тест №4 удаление документа
+
+Исходное состояние базы данных
+![Исходное состояние базы данных](documentation/tests/8.png)
+
+Удаление файла Twitch.png
+![Удаление Twitch.png](documentation/tests/10.png)
+
+Изменения в БД после удаления файла
+![Изменения в бд](documentation/tests/11.png)
+
+### Тест №5 Изменение имени файла
+
+Запрос на изменение имени файла api.txt
+![Изменение имени файла](documentation/tests/12.png)
+
+Изменения в БД после изменения имени
+![Изменения в бд](documentation/tests/13.png)
+
+### Тест №6 Скачивание файла
+
+Запрос на скачивание файла
+![Скачивание файла](documentation/tests/14.png)
