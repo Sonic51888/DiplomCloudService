@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-06-10T16:57:22.868Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="NfeaDV1CailT6hxpHe9g" version="21.6.8" type="device">
+<mxfile host="Electron" modified="2024-06-12T12:23:03.597Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="LmykiAh1E8DZa4yi4-6S" version="21.6.8" type="device">
   <diagram name="Page-1" id="5f0bae14-7c28-e335-631c-24af17079c00">
-    <mxGraphModel dx="1727" dy="1023" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
+    <mxGraphModel dx="1036" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -10,10 +10,10 @@
         <mxCell id="4HifgqByvHKR-P68LyyS-11" value="CloudService (Docker compose)" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fontSize=30;" parent="1" vertex="1">
           <mxGeometry x="520" y="320" width="730" height="380" as="geometry" />
         </mxCell>
-        <mxCell id="7-nUA8H6BXywVRBQ53PC-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0.942;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="39150e848f15840c-8" target="4HifgqByvHKR-P68LyyS-1">
+        <mxCell id="7-nUA8H6BXywVRBQ53PC-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0.942;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" parent="1" source="39150e848f15840c-8" target="4HifgqByvHKR-P68LyyS-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="39150e848f15840c-8" value="&lt;font face=&quot;Helvetica&quot;&gt;FRONT (Docker cont)&lt;/font&gt;" style="html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=18;align=center;verticalAlign=top;" parent="1" vertex="1">
+        <mxCell id="39150e848f15840c-8" value="&lt;font face=&quot;Helvetica&quot;&gt;FRONT (&lt;/font&gt;NodeJS&lt;font face=&quot;Helvetica&quot;&gt;)&lt;/font&gt;" style="html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=18;align=center;verticalAlign=middle;" parent="1" vertex="1">
           <mxGeometry x="230" y="400" width="230" height="240" as="geometry" />
         </mxCell>
         <mxCell id="4HifgqByvHKR-P68LyyS-15" value="BACKEND (Docker cont)" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fontSize=18;" parent="1" vertex="1">
@@ -30,9 +30,6 @@
         </mxCell>
         <mxCell id="4HifgqByvHKR-P68LyyS-18" value="API" style="rounded=0;whiteSpace=wrap;html=1;fontSize=20;" parent="1" vertex="1">
           <mxGeometry x="580" y="460" width="120" height="140" as="geometry" />
-        </mxCell>
-        <mxCell id="4HifgqByvHKR-P68LyyS-19" value="NodeJS" style="rounded=0;whiteSpace=wrap;html=1;fontSize=20;" parent="1" vertex="1">
-          <mxGeometry x="260" y="460" width="160" height="140" as="geometry" />
         </mxCell>
         <mxCell id="4HifgqByvHKR-P68LyyS-20" value="APP Logic" style="rounded=0;whiteSpace=wrap;html=1;fontSize=20;" parent="1" vertex="1">
           <mxGeometry x="730" y="460" width="120" height="140" as="geometry" />
