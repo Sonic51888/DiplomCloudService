@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # [Дипломный проект "Облачное хранилище"](https://github.com/netology-code/jd-homeworks/blob/master/diploma/cloudservice.md)
+=======
+# [Дипломный проект"Облачное хранилище"](https://github.com/netology-code/jd-homeworks/blob/master/diploma/cloudservice.md)
+>>>>>>> bdfcd079588e99c814f632b893c8b21f2f7c3a99
 
 ## Описание проекта
 
@@ -88,7 +92,9 @@ values
 
 В качестве места хранилища файлов и данных о пользователях используется СУБД PostgreSQL.
 
-##Архитектура проекта
+
+## Архитектура проекта
+
 ![Cloudservice schema.png](documentation/Cloudservice%20schema.png)
 
 ## Тестирование
@@ -99,6 +105,7 @@ values
 В данном тесте показывается попытка залогиниться и получить токен от сервера
 
 Исходное состояние таблицы
+<<<<<<< HEAD
 ![Исходное состояние таблицы](documentation/tests/1.png)
 
 Запрос в Postman
