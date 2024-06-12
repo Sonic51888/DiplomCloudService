@@ -1,4 +1,4 @@
-# [Дипломный проект"Облачное хранилище"] (https://github.com/netology-code/jd-homeworks/blob/master/diploma/cloudservice.md)
+[Дипломный проект"Облачное хранилище"] (https://github.com/netology-code/jd-homeworks/blob/master/diploma/cloudservice.md)
 
 ## Описание проекта
 
@@ -88,7 +88,8 @@ values
 
 В качестве места хранилища файлов и данных о пользователях используется СУБД PostgreSQL.
 
-##Архитектура проекта
+## Архитектура проекта
+
 ![Cloudservice schema.png](documentation/Cloudservice%20schema.png)
 
 ## Тестирование
