@@ -1,4 +1,4 @@
-# [Дипломный проект"Облачное хранилище"] (https://github.com/netology-code/jd-homeworks/blob/master/diploma/cloudservice.md)
+# [Дипломный проект "Облачное хранилище"](https://github.com/netology-code/jd-homeworks/blob/master/diploma/cloudservice.md)
 
 ## Описание проекта
 
@@ -89,20 +89,39 @@ values
 В качестве места хранилища файлов и данных о пользователях используется СУБД PostgreSQL.
 
 ##Архитектура проекта
-![Cloudservice schema.png](documentation%Cloudservice schema.png)
+![Cloudservice schema.png](documentation/Cloudservice%20schema.png)
 
 ## Тестирование
 
 Тестирование осуществлено с помощью Postman использовалась следующая коллекция тестов [Библиотека тестов](Diplom.postman_collection.json)
 
-### Тест №1 /login
+### Тест №1 Авторизация
 В данном тесте показывается попытка залогиниться и получить токен от сервера
 
 Исходное состояние таблицы
-![Исходное состояние таблицы](documentation%tests%1 Исходное состояние таблицы USERS.png)
+![Исходное состояние таблицы](documentation/tests/1.png)
 
 Запрос в Postman
-![login и ответ сервера](documentation%tests%2 login и ответ сервера.png)
+![login и ответ сервера](documentation/tests/2.png)
 
 Изменения в бд после запроса токена
-![Изменения в бд](documentation%tests%3 Изменения в бд после запроса токена.png)
+![Изменения в бд](documentation/tests/3.png)
+
+### Тест №2 Загрузка файла
+
+Загрузка документов в хранилище
+
+Исходное состояние таблицы
+![Исходное состояние таблицы](documentation/tests/4.png)
+
+Загрузка файла api.txt
+![Загрузка файла api.txt](documentation/tests/5.png)
+
+Загрузка файла testfile.txt
+![Загрузка файла testfile.txt](documentation/tests/6.png)
+
+Загрузка файла twitch.jpg
+![Загрузка файла twitch.jpg](documentation/tests/7.png)
+
+Изменения в бд после загрузки файлов
+![Изменения в бд](documentation/tests/8.png)
